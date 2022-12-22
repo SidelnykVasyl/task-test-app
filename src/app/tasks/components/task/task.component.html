@@ -1,0 +1,21 @@
+<div class="task" [ngClass]="{ done: task.done}">
+  <h2 class="task__label">
+    <span [routerLink]="task.id">
+      {{task.label}}
+    </span>
+    <img (click)="onDelete(task)" src="/assets/svg/close-icon.svg" alt="#">
+  </h2>
+  <h3 class="task__category">
+    {{task.category}}
+    <img
+      [routerLink]="task.id + '/edit'"
+      (click)="onEdit(task)"
+      src="/assets/svg/pen-solid.svg" alt="#">
+  </h3>
+  <p class="task__description">
+    {{task.description}}
+  </p>
+  <span>
+    {{task.done}}
+  </span>
+</div>

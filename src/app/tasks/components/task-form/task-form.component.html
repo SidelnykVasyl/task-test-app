@@ -1,0 +1,25 @@
+<form *ngIf="showAddTask" class="form" [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="form-control">
+    <label for="label">Label</label>
+    <input type="text" placeholder="Add label" formControlName="label">
+  </div>
+
+  <div class="form-control">
+    <label for="category">Category</label>
+    <input type="text" placeholder="Add category" formControlName="category">
+  </div>
+
+  <div class="form-control">
+    <label for="description">Description</label>
+    <input type="text" placeholder="Add label" formControlName="description">
+  </div>
+
+  <div *ngIf="isEditMode" class="form-control">
+    <label for="date">Done</label>
+    <input type="date" formControlName="done" [value]="done">
+  </div>
+
+  <button [disabled]="!form.valid" type="submit">
+    {{isEditMode ? 'Edit' : 'Add'}}
+  </button>
+</form>

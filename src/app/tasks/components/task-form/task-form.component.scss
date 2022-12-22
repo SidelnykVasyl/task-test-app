@@ -1,0 +1,25 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  &-control {
+    margin-bottom: 10px;
+  }
+  input {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px 5px;
+  }
+  button {
+    border: none;
+    background: #1c2821;
+    color: #fff;
+    padding: 10px 15px;
+    cursor: pointer;
+    &:disabled {
+      opacity: .5;
+      pointer-events: none
+    }
+  }
+}

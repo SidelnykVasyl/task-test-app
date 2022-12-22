@@ -1,0 +1,6 @@
+<header>
+  <h1 class="title-text">Tasks</h1>
+  <app-button
+    [text]="showAddTask ? 'Close' : 'Add'"
+    [color]="showAddTask ? 'red' : 'green'" (click)="toggleAddTask()"></app-button>
+</header>
