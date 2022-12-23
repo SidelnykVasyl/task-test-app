@@ -14,9 +14,9 @@
     <input type="text" placeholder="Add label" formControlName="description">
   </div>
 
-  <div *ngIf="isEditMode" class="form-control">
+  <div class="form-control" *ngIf="isEditMode">
     <label for="date">Done</label>
-    <input type="date" formControlName="done" [value]="done">
+    <input type="date" formControlName="date" [value]="date">
   </div>
 
   <button [disabled]="!form.valid" type="submit">

@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './edit-task.component.html',
   styleUrls: ['./edit-task.component.scss']
 })
-export class EditTaskComponent{
+export class EditTaskComponent {
 
 }

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../models/task';
 import { TasksService } from '../services/tasks.service';
-
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
@@ -13,25 +12,25 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private tasksService: TasksService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.tasksService.getTasks().pipe(
-    ).subscribe((tasks) => {
-      this.tasks = tasks;
-      this.sortTasks(tasks);
-      }
+    this.tasksService.getTasks()
+      .subscribe((tasks) => {
+        this.tasks = tasks;
+        this.sortTasks(tasks);
+        }
     );
   }
 
   public deleteTask(task: Task): void {
     this.tasksService.delete(task).subscribe(() => {
-      this.tasks = this.tasks.filter((t: Task) => t.id !== task.id);
+      this.tasks = this.tasks.filter((t) => t.id !== task.id);
     });
   }
 
   public addTask(task: Task): void {
-    this.tasksService.add(task).subscribe((t: Task) => this.tasks.push(t));
+    this.tasksService.add(task).subscribe((t) => this.tasks.push(t));
   }
 
   private sortTasks(tasks: Task[]): void {
@@ -44,8 +43,8 @@ export class TasksComponent implements OnInit {
         return -1;
       }
 
-      const timeA = new Date((a.done as string).split('-').reverse().join('-')).getTime();
-      const timeB = new Date((b.done as string).split('-').reverse().join('-')).getTime();
+      const timeA = new Date(a.date.split('-').reverse().join('-')).getTime();
+      const timeB = new Date(b.date.split('-').reverse().join('-')).getTime();
 
       return timeA - timeB;
     });

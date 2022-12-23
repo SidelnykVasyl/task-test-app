@@ -2,7 +2,8 @@ export interface Task {
   id: number | string;
   category: string;
   description: string;
-  done: string | boolean;
+  done: boolean;
+  date: string;
   label: string;
 }
 

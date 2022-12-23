@@ -2,7 +2,7 @@
 <div class="container">
   <section class="tasks">
     <app-header></app-header>
-    <input type="text" class="form-control search-field" placeholder="Search Here" [(ngModel)]="searchText">
+    <input type="text" class="search-field" placeholder="Search Here" [(ngModel)]="searchText">
     <app-task-form [showAddTask]="false" (onAddTask)="addTask($event)"></app-task-form>
     <app-task
       *ngFor="let task of tasks | searchFilter: searchText"

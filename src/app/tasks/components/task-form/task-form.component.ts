@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { combineLatest, Subscription } from 'rxjs';
@@ -6,14 +6,14 @@ import { Task } from '../../models/task';
 import { TasksService } from '../../services/tasks.service';
 import { ViewService } from '../../services/view.service';
 import { v4 as uuidv4 } from 'uuid';
-import { mergeMap, switchMap, take } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-form',
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.scss']
 })
-export class TaskFormComponent implements OnInit {
+export class TaskFormComponent implements OnInit, OnDestroy {
   @Input() showAddTask: boolean;
   @Output() onAddTask: EventEmitter<Task> = new EventEmitter();
 
@@ -64,7 +64,7 @@ export class TaskFormComponent implements OnInit {
   private editTask(): void {
     const editedTask = {
       ...this.form.value,
-      done: this.mapDate(this.done)
+      date: this.mapDate(this.date)
     };
 
     combineLatest([
@@ -90,15 +90,15 @@ export class TaskFormComponent implements OnInit {
             this.task = task;
             this.form.patchValue({
               ...this.task,
-              done: this.mapDate(this.task.done)
+              date: this.mapDate(this.task.date)
             });
           }
         );
     }
   }
 
-  private mapDate(date: string | boolean): string | boolean {
-    return date ? (date as string).split('-').reverse().join('-') : date;
+  private mapDate(date: string): string {
+    return date.split('-').reverse().join('-');
   }
 
   private clearForm(): void {
@@ -115,12 +115,17 @@ export class TaskFormComponent implements OnInit {
       category: ['', Validators.required],
       description: ['', Validators.required],
       label: ['', Validators.required],
-      done: ['']
+      done: [''],
+      date: ['']
     });
   }
 
-  get done() {
-    return this.form.get('done').value;
+  get date() {
+    return this.form.get('date').value;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

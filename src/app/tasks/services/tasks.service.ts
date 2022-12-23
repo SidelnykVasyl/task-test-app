@@ -14,7 +14,8 @@ export class TasksService {
   private tasks$: BehaviorSubject<Task[]> = new BehaviorSubject<Task[]>([]);
 
   constructor(private http: HttpClient) {
-    this.get().pipe(take(1)).subscribe((res) => this.tasks$.next(res));
+    this.get().pipe(take(1))
+      .subscribe((tasks) => this.tasks$.next(tasks));
   }
 
   getTasks(): Observable<Task[]> {
